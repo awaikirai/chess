@@ -47,7 +47,7 @@ def posi(posi):
 
         else:
             be_F = None
-            be_R = int(posi[0])
+            be_R = 8 - int(posi[0])
             af_F = aton(posi[1])
             af_R = 8 - int(posi[2])
 #            print("nu_al_nu")
