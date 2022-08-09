@@ -91,7 +91,7 @@ class Banmen:
             print("ポーンでとれる駒の位置は")
             Fc = "abcdefgh"
             for i in range(count):
-                print("{}{}".format(Fc[int(Fs[i])], Rs[i]))
+                print("{}{}".format(Fc[int(Fs[i])], 8 - int(Rs[i])))
             print("です")
 
 

@@ -33,10 +33,10 @@ def posi(posi):
         if posi[0].isalpha() == True:
             be_F = aton(posi[0])
 
-            if kihu[1].isalpha() == True:
+            if posi[1].isalpha() == True:
                 be_R = None
                 af_F = aton(posi[1])
-                af_R = posi[2]
+                af_R = 8 - int(posi[2])
 #                print("al_al_nu")
 
             else:
@@ -74,7 +74,7 @@ def all_p_j(count, bFs, bRs, be_F, be_R, af_F, af_R):
             return 'W', None, None, None
 
         elif be_F != None and be_R != None:
-            for cou in range(count-1):
+            for cou in range(count):
                 if str(bFs)[cou] == str(be_F) and str(bRs)[cou] == str(be_R):
                     bF = be_F
                     bR = be_R
@@ -85,14 +85,14 @@ def all_p_j(count, bFs, bRs, be_F, be_R, af_F, af_R):
             return bF, bR, af_F, af_R
 
         else:
-            for cou in range(count-1):
+            for cou in range(count):
                 if str(bFs)[cou] == str(be_F):
                     if str(bFs).count(str(bFs)[cou]) > 1:
                         bF = 'W'
                         bR = None
                     else:
                         bF = int(str(bFs)[cou])
-                        bR = int(str(RFs)[cou])
+                        bR = int(str(bRs)[cou])
                     break
 
                 elif str(bRs)[cou] == str(be_R):
@@ -101,7 +101,7 @@ def all_p_j(count, bFs, bRs, be_F, be_R, af_F, af_R):
                         bR = None
                     else:
                         bF = int(str(bFs)[cou])
-                        bR = int(str(bFs)[cou])
+                        bR = int(str(bRs)[cou])
                     break
                 else:
                     bF = 'W'
@@ -225,7 +225,7 @@ def knight(board, koma, aF, aR):
     if br > 0 and rf > 1:
         bFs, bRs, count = bFsbRs(board, aF + 2, aR + 1, koma, bFs, bRs, count)
 
-    if br > 0 and rf > 1:
+    if br > 1 and rf > 0:
         bFs, bRs, count = bFsbRs(board, aF + 1, aR + 2, koma, bFs, bRs, count)
 
     return count, bFs, bRs
@@ -346,9 +346,9 @@ def castling(turn, koma, cc):
             return 6, 7, 5, 7
 
     elif turn < 0 and cc[3] == 0:
-        if koma == 'qC' and cc[4] == 0:
+        if koma == '-qC' and cc[4] == 0:
             return 2, 0, 3, 0
-        elif koma == 'kC' and cc[5] == 0:
+        elif koma == '-kC' and cc[5] == 0:
             return 6, 0, 5, 0
 
     return 'Wc', None, None, None
@@ -363,12 +363,12 @@ def screen(turn, board):
             if turn > 0 and board[R][F] == 'P':
                 if F > 0 and board[R - 1][F - 1] != 0 and '-' in board[R - 1][F - 1]:
                     Fs += (F - 1) * (10 ** count)
-                    Rs += (R + 1) * (10 ** count)
+                    Rs += (R - 1) * (10 ** count)
                     count += 1
 
                 if F < 7 and board[R - 1][F + 1] != 0 and '-' in board[R - 1][F + 1]:
                     Fs += (F + 1) * (10 ** count)
-                    Rs += (R + 1) * (10 ** count)
+                    Rs += (R - 1) * (10 ** count)
                     count += 1
 
             elif turn < 0 and board[R][F] == '-P':
