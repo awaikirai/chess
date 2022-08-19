@@ -190,7 +190,6 @@ def tuitate(turn, board):
 
 
         elif turn < 0:
-            print("black")
             GR = input("黒の手番です -> ")
             koma, posi, kihu = nyuu.kihu(GR)
             if koma == 'W':
